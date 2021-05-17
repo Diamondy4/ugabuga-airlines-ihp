@@ -8,11 +8,11 @@ CREATE TABLE Employees (
     Surname TEXT NOT NULL,
     Name TEXT NOT NULL,
     Passport TEXT NOT NULL UNIQUE,
-    Airport_ID UUID NOT NULL,
-    Schedule TEXT NOT NULL,
-    "Role" INT NOT NULL,
-    Salary INT NOT NULL,
-    JobName TEXT NOT NULL
+    Airport_ID UUID DEFAULT NULL,
+    Schedule TEXT DEFAULT NULL,
+    AccessLevel INT DEFAULT 0 NOT NULL,
+    Salary REAL DEFAULT 0 NOT NULL,
+    JobName TEXT DEFAULT NULL
 );
 CREATE TABLE Airports (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
@@ -54,14 +54,10 @@ CREATE TABLE EmployeeFlight (
 CREATE TABLE Dispatchers (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
     Emp_ID UUID NOT NULL UNIQUE,
-    Port_ID UUID NOT NULL,
-    Gate_ID UUID NOT NULL,
-    Flight_ID UUID NOT NULL
+    Port_ID UUID NOT NULL
 );
 ALTER TABLE Dispatchers ADD CONSTRAINT Dispatchers_fk0 FOREIGN KEY (Emp_ID) REFERENCES Employees (id) ON DELETE CASCADE;
 ALTER TABLE Dispatchers ADD CONSTRAINT Dispatchers_fk1 FOREIGN KEY (Port_ID) REFERENCES Airports (id) ;
-ALTER TABLE Dispatchers ADD CONSTRAINT Dispatchers_fk2 FOREIGN KEY (Gate_ID) REFERENCES Gates (id) ;
-ALTER TABLE Dispatchers ADD CONSTRAINT Dispatchers_fk3 FOREIGN KEY (Flight_ID) REFERENCES Flights (id) ;
 ALTER TABLE EmployeeFlight ADD CONSTRAINT EmployeeFlight_fk0 FOREIGN KEY (Employee_ID) REFERENCES Employees (id) ON DELETE CASCADE;
 ALTER TABLE EmployeeFlight ADD CONSTRAINT EmployeeFlight_fk1 FOREIGN KEY (Flight_ID) REFERENCES Flights (id) ;
 ALTER TABLE Employees ADD CONSTRAINT Employees_fk0 FOREIGN KEY (Airport_ID) REFERENCES Airports (id) ;

@@ -5,8 +5,8 @@ import Web.Controller.Prelude
 import Web.View.Sessions.New
 
 instance Controller SessionsController where
-  action NewSessionAction = Sessions.newSessionAction @User
-  action CreateSessionAction = Sessions.createSessionAction @User
-  action DeleteSessionAction = Sessions.deleteSessionAction @User
+  action NewSessionAction = Sessions.newSessionAction @Employee
+  action CreateSessionAction = Sessions.createSessionAction @Employee
+  action DeleteSessionAction = Sessions.deleteSessionAction @Employee
 
-instance Sessions.SessionsControllerConfig User
+instance Sessions.SessionsControllerConfig Employee

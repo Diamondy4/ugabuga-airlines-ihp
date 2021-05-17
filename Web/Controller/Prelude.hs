@@ -10,3 +10,6 @@ import Web.Types
 import Application.Helper.Controller
 import IHP.ControllerPrelude
 import Generated.Types
+import Web.View.Helpers.ProfileLayout (isAdmin)
+
+

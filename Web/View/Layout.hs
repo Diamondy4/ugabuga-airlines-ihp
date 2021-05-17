@@ -19,7 +19,7 @@ defaultLayout inner =
     {stylesheets}
     {scripts}
 
-    <title>App</title>
+    <title>UGA-BUGA AIRLINES</title>
 </head>
 <body>
   {ugaBugaHeader}
@@ -28,12 +28,14 @@ defaultLayout inner =
         {inner}
     </div>
     {ugaBugaFooter}
+    {modal}
 </body>
 |]
 
 stylesheets :: Html
 stylesheets =
   [hsx|
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
         <link rel="stylesheet" href="/vendor/bootstrap.min.css"/>
         <link rel="stylesheet" href="/vendor/flatpickr.min.css"/>
         <link rel="stylesheet" href="/app.css"/>
@@ -72,19 +74,49 @@ ugaBugaHeader :: Html
 ugaBugaHeader =
   [hsx|
   <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-info py-4"  style="font-family:Comic Sans MS">
-        <a class="navbar-brand" style="font-size:200%" href="#">UGA-BUGA AIRLINES</a>
+    <nav class="navbar navbar-dark bg-info py-4"  style="font-family:Comic Sans MS">
+        <a class="navbar-brand" style="font-size:200%" href={ShowProfileAction}>UGA-BUGA AIRLINES</a>
+        <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+          aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="" role="button" ><i class="fa fa-bars" aria-hidden="true" style="color:#ffffff"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+          <ul class="navbar-nav mr-auto">
+            {headerElems user}
+          </ul>
+        </div>
     </nav>
   </header>
 |]
+  where
+    user = currentUserOrNothing
+
+headerElems Nothing =
+  [hsx| 
+    <li class="nav-item active">
+        <a class="nav-link" href={NewSessionAction}>Вход и регистрация<span class="sr-only">(current)</span></a>
+    </li>
+  |]
+headerElems (Just user) =
+  [hsx| 
+    <li class="nav-item active">
+        <p class="text-right">{get #name user} {get #surname user}</p>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link text-right" href={EditPasswordProfileAction}>Смена пароля<span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link js-delete js-delete-no-confirm text-right" href={DeleteSessionAction}>Выход</a>
+    </li>
+  |]
 
 ugaBugaFooter :: Html
 ugaBugaFooter =
   [hsx|
     <footer class="footer">
-      <div class="container footer-text text-muted" style="font-family:Comic Sans MS; font-size:150%">
-        <span>first the uwu</span>
-        <span>then the daddy</span>
+      <div class="container footer-text text-white" style="font-family:Comic Sans MS; font-size:150%">
+        <span>т. 1-222-333-44-55</span>
+        <span>kisrefod@yandex.ru</span>
       </div>
     </footer>
 |]
@@ -99,9 +131,10 @@ authLayout auth inner =
     <a class={classes ["nav-link", ("active", isActivePath NewSessionAction)]} id="login-tab" href={NewSessionAction} role="tab" aria-controls="login" aria-selected="true">Вход</a>
   </li>
   <li class="nav-item" role="presentation">
-    <a class={classes ["nav-link", ("active", isActivePath NewUserAction)]} id="signup-tab" href={NewUserAction} role="tab" aria-controls="signup" aria-selected="false">Регистрация</a>
+    <a class={classes ["nav-link", ("active", isActivePath NewEmployeeAction)]} id="signup-tab" href={NewEmployeeAction} role="tab" aria-controls="signup" aria-selected="false">Регистрация</a>
   </li>
 </ul>
+<br>
 <!-- Tab panes -->
 <div class="tab-content">
   <div class="tab-pane fade show active">

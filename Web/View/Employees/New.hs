@@ -1,7 +1,8 @@
 module Web.View.Employees.New where
+
 import Web.View.Prelude
 
-data NewView = NewView { employee :: Employee }
+data NewView = NewView {employee :: Employee}
 
 instance View NewView where
   html NewView {..} =
@@ -21,9 +22,21 @@ instance View NewView where
 
 renderForm :: Employee -> Html
 renderForm emp =
-  formFor [hsx|
-    {(textField #name)}
-    {(textField #email)}
-    {(textField #passwordHash)}
-    {submitButton}
+  formFor
+    emp
+    [hsx|
+    <div class="row flex justify-content-center">
+        <div class="col">
+          {(textField #name) {fieldLabel = "Имя",fieldClass = "col", disableGroup = True, placeholder = "Уга"}  }
+        </div>
+        <div class="col">
+          {(textField #surname) {fieldLabel= "Фамилия",fieldClass = "col", disableGroup = True, placeholder = "Буга"}}
+        </div>
+    </div>
+    {(textField #passport) {fieldLabel = "Паспорт", placeholder = "12345 123456"}}
+    {(textField #email) {fieldLabel = "E-Mail", placeholder = "login@server.com"}}
+    {(passwordField #passwordHash) {fieldLabel = "Пароль", placeholder = "Пароль"}}
+    <div class="flex items-center justify-between">
+      {submitButton {label = "Зарегистрироваться", buttonClass = "btn btn-primary btn-block btn-gray"}}
+    </div>
 |]

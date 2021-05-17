@@ -1,0 +1,52 @@
+.body-btn {
+    background-color: #086779;
+    border: 10px solid #086779;
+}
+
+.data-table tr.marked{
+    background-color: #8BDDEC; 
+}
+
+.bgclr-blue {
+    background: #ddf;
+}
+
+#settingModal {
+    display: none;
+}
+
+.modalTitle {
+    display: flex;
+    width: 100.1%;
+    height: 6vh;
+    background-color: #158ea9;
+
+    font-family: sans-serif;
+    font-size: 3.2vh;
+    color: white;
+    align-items: center;
+}
+
+.settingInput {
+    background: #ddf;
+    border: 3px solid #878787;
+    padding: 4px 10px;
+    outline: 0;
+}
+
+.settingText {
+    margin-top: 13px;
+    font-family: sans-serif;
+    font-size: 2.8vh;
+}
+
+#settingApply {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.settingField {
+    display: flex;
+    width: 100%;
+}
